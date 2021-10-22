@@ -22,6 +22,19 @@ const Profile = (props) => {
   const [timesPressed, setTimesPressed] = useState(0);
 
 
+  // first number
+  const [num1, setNum1] = useState(6);
+  // second number
+  const [num2, setNum2] = useState(12);
+
+  const [answer, setAnswer] = useState();
+
+  // toggle showing the check button
+  const [showCheckAnswer, setShowCheckAnswer] = useState(false);
+  
+  const [showCheckAnswer2, setShowCheckAnswer2] = useState(false);
+
+
   // when the component is loaded it gets the data from storage
   // and updatges the info, name, and email fields
   // but this is the only time useEffect is called
@@ -91,19 +104,71 @@ const Profile = (props) => {
   }
 
 
+  function checkUserAnswer() {
+    if(showCheckAnswer == true){
+      setShowCheckAnswer(false)
+    }
+    else{
+      setShowCheckAnswer(true)
+    }
+  }
 
+  function checkUserAnswer2() {
+    if(showCheckAnswer2 == true){
+      setShowCheckAnswer2(false)
+    }
+    else{
+      setShowCheckAnswer2(true)
+    }
+  }
 
 
       return (
             <View style={styles.container}>
               <Text style={styles.header}>
-                 Write a secret note!
+                 Quiz 3
               </Text>
+              <Text style={styles.subtext}>
+                 CS153a Fall21
+              </Text>
+              <Text style={styles.subtext}>
+                 Write the code for this App, including this text!
+              </Text>
+              <Text style={styles.subtext2}>
+              Enter the radius and the height of a cylinder in inches and we will calculate the volume in gallons. A 6 inch radius and 12 inch height will have volume 5.88. Divide cubic inches by 231 to get gallons, and show only 2 digist after the decimal point in the volume. 
+              </Text>
+              <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+                <Text style={{fontSize:20, paddingLeft: 2, backgroundColor:'pink'}}>radius: </Text>
+              <TextInput
+                    style={styles.textinput2}
+                    // placeholder="radius"
+                    onChangeText={Number => {
+                      setNum1(Number)
+                    }}
+                    value={num1}
+                />
+                </View>
+                <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+                <Text style={{fontSize:20, paddingLeft: 2, backgroundColor:'pink'}}>height: </Text>
+              <TextInput
+                    style={styles.textinput2}
+                    // placeholder="radius"
+                    onChangeText={Number => {
+                      setNum2(Number)
+                    }}
+                    value={num2}
+                />
+                </View>
+                
+                
+
               {/* text on the left side */}
-              <Text style={styles.header}>
+              {/* <Text style={styles.header}>
                Name: {name}
-              </Text>
-              <Pressable
+              </Text> */}
+
+              {/* below is the secret text, use for components going away and staying */}
+              {/* <Pressable
         style={({ pressed }) => [
           styles.header
         ]}>
@@ -112,74 +177,60 @@ const Profile = (props) => {
             {pressed ? note : disguise}
           </Text>
         )}
-      </Pressable>
+      </Pressable> */}
               {/* <Text style={styles.header}>
                Email: {email}
               </Text> */}
-              <View style={styles.inputs}>
-              <TextInput
-                    style={styles.textinput}
-                    placeholder="name"
-                    onChangeText={text => {
-                      setName(text)
-                    }}
-                    value={name}
+
+              
+              
+              <View style={{width: '40%'}} >
+                <Button
+                    color='green' title='CALCULATE VOLUME'
+                    onPress = {() => {
+                      checkUserAnswer()
+                      
+                       }}
                 />
+                </View>
+
+                <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+                <Text style={{fontSize:20, paddingLeft: 2, backgroundColor:'pink'}}> The volume is </Text>
+                <Text style={showCheckAnswer ? styles.textinput3 : styles.noDisplay}>
+                {(num1 * num2)}</Text>
+                <Text style={styles.textinput4}>gallons</Text>
+                </View>
+
+                <View style={{width: '50%'}} >
+                <Button
+                    color='dodgerblue' title='TOGGLE CALCULATIONS VIEW'
+                    onPress = {() => {
+                      checkUserAnswer2()
+                      
+                       }}
+                />
+                
+                </View>
+
+                <Text style={showCheckAnswer2 ? styles.textinput : styles.noDisplay}> radius: {num1} </Text>
+                <Text style={showCheckAnswer2 ? styles.textinput : styles.noDisplay}> height: {num2} </Text>
+                <Text style={showCheckAnswer2 ? styles.textinput : styles.noDisplay}> area of base = pi*r^2 {3.14159 * num1 * num1} </Text>
+                <Text style={showCheckAnswer2 ? styles.textinput : styles.noDisplay}> volume of cylinder =  {3.14159 * num1 * num1} cubic inches</Text>
+                <Text style={showCheckAnswer2 ? styles.textinput : styles.noDisplay}> volume of cylinder =  {3.14159 * num1 * num1/231} gallons </Text>
+
+              <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+               
+                </View>
+                
+              
               {/* <TextInput
                     style={styles.textinput}
                     placeholder="email"
                     onChangeText={text => {setEmail(text)}}
                     value={email}
                 /> */}
-                <TextInput
-                    style={styles.textinput}
-                    onChangeText={setDisguise}
-                    value={disguise}
-                    placeholder="disguise"
-                />
-                <TextInput
-                    secureTextEntry={true}
-                    style={styles.textinput}
-                    placeholder="secret"
-                    onChangeText={setNote}
-                    value={note}
-                    // multiline={true}
-                    // numberOfLines={4}
-                    
-                />
-                </View>
-                <View style={styles.buttons}>
-              <Button
-                    color='green' title='Save secret note'
-                    onPress = {() => {
-                         console.log("saving profile");
-                         //for LOADING
-                         const theInfo = {name:name, email:email, disguise:disguise, note:note}
-                         console.log(`theInfo=${theInfo}`)
-                         setInfo(theInfo)
-                         console.log('data='+JSON.stringify(theInfo))
-                         storeData(theInfo)
-                       }}
-                />
-                </View>
-                <View style={styles.buttons}>
-              <Button
-                  color='red' title='Delete note'
-                  onPress = {() => {
-                        console.log('clearing memory');
-                        clearAll()
-                      }}
-                />
-                </View>
-                <View style={styles.buttons}>
-              <Button
-                  color='grey' title='Load secret note'
-                  onPress = {() => {
-                        console.log('loading profile');
-                        getData()
-                      }}
-                />
-                </View>
+                
+                
                 {/* <View style={styles.buttons}>
                 <Button
                   color='purple' title='color'
@@ -202,7 +253,7 @@ const Profile = (props) => {
       backgroundColor: '#fff',
       alignItems: 'left',
       justifyContent: 'left',
-      padding: '10px',
+      // padding: '10px',
     },
     buttons:{
       margin: 10,
@@ -213,12 +264,28 @@ const Profile = (props) => {
       width: '40%',
     },
     textinput:{
-      margin:10,
+      // margin:10,
       fontSize:20,
-      borderColor:'black',
-      borderWidth:'2px',
-      width: '40%',
-      borderRadius:'10px'
+      color: 'black',
+      // borderColor:'black',
+      // borderWidth:'2px',
+      // width: '40%',
+      // borderRadius:'10px'
+    },
+    textinput2:{
+      fontSize:20,
+      width: '55%',
+      backgroundColor:'pink',
+    },
+    textinput3:{
+      fontSize:20,
+      width: '6%',
+      backgroundColor:'pink',
+    },
+    textinput4:{
+      fontSize:20,
+      width: '13%',
+      backgroundColor:'pink',
     },
     noteinput:{
       multiline : true,
@@ -227,7 +294,28 @@ const Profile = (props) => {
       fontSize:20
     },
     header: {
-      fontSize:40,
+      fontSize:100,
+      backgroundColor:'lightgreen',
+      width: '80%',
+      // color:'blue'
+    },
+    subtext: {
+      fontSize:20,
+      backgroundColor:'lightgreen',
+      width: '80%',
+      // color:'blue'
+    },
+    noDisplay:{
+      display: "none",
+    },
+    subtext2: {
+      fontSize:20,
+      // color:'blue'
+    },
+    subtext3: {
+      fontSize:20,
+      backgroundColor:'pink',
+      width: '55%',
       // color:'blue'
     },
     secret: {
