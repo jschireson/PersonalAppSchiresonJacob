@@ -10,8 +10,6 @@ import GradingScreen from './Grading'
 import Social from './Social'
 import School from './School'
 import Other from './Other'
-import coolButton from './CreateNote';
-
 
 // import testingScreen from './testing'
 import { strict } from 'yargs';
