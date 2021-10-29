@@ -1,4 +1,5 @@
 import React from 'react';
+import {View, StyleSheet} from 'react-native';
 /*
 import {View} from 'react-native';
 import NavDemo1 from './components/NavDemo1'
@@ -17,17 +18,27 @@ import ShowPage from './components/ShowPage'
 import Counter from './components/Counter.js'
 import WebViewer from './components/WebViewer'
 */
-import Profile from './components/Profile'
+import Social from './components/Social'
 import Pomodoros from './components/Pomodoros'
 import WebViewer from './components/WebViewer'
 import NavDemo1 from './components/NavDemo1'
+
 
 
 export default function App() {
   return (
     //<Pomodoros />
     //<WebViewer/>
-    //<Profile />
-    <NavDemo1 />
+    //<Social />
+   <View style={styles.container}>
+    <NavDemo1>
+    </NavDemo1>
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container:{
+    flex: 1,
+  }
+})

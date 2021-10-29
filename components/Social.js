@@ -1,5 +1,5 @@
 /*
-  Profile.js is a demo of using the Asynchronous Storage...
+  Social.js is a demo of using the Asynchronous Storage...
   It looks up your name and email and other info from async storage
   and puts it on the page. It also lets you update this info.
 
@@ -9,16 +9,24 @@
   https://react-native-async-storage.github.io/async-storage/docs/api
 */
 import React, { useState, useEffect } from "react";
-import { Button, StyleSheet, Text, TextInput, View, Image, Pressable, Input} from "react-native";
+import { Button, StyleSheet, Text, TextInput, View, Image, Pressable, Input, ScrollView} from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { color } from "react-native-reanimated";
 
-const Profile = (props) => {
+const Social = (props) => {
   const [info, setInfo] = useState({note:''});
   const [name, setName] = useState('');
   const [email,setEmail] = useState('')
   const [note,setNote] = useState('')
   const [disguise, setDisguise] = useState('')
+  const [note2,setNote2] = useState('')
+  const [disguise2, setDisguise2] = useState('')
+  const [note3,setNote3] = useState('')
+  const [disguise3, setDisguise3] = useState('')
+  const [note4,setNote4] = useState('')
+  const [disguise4, setDisguise4] = useState('')
+  const [note5,setNote5] = useState('')
+  const [disguise5, setDisguise5] = useState('')
   const [timesPressed, setTimesPressed] = useState(0);
 
 
@@ -44,6 +52,14 @@ const Profile = (props) => {
             setEmail(data.email)
             setDisguise(data.disguise)
             setNote(data.note)
+            setDisguise2(data.disguise2)
+            setNote2(data.note2)
+            setDisguise3(data.disguise3)
+            setNote3(data.note3)
+            setDisguise4(data.disguise4)
+            setNote4(data.note4)
+            setDisguise5(data.disguise5)
+            setNote5(data.note5)
             console.log('just set Info, Name and Email')
           } else {
             console.log('just read a null value from Storage')
@@ -52,6 +68,14 @@ const Profile = (props) => {
             setEmail("")
             setDisguise("")
             setNote("")
+            setDisguise2("")
+            setNote2("")
+            setDisguise3("")
+            setNote3("")
+            setDisguise4("")
+            setNote4("")
+            setDisguise5("")
+            setNote5("")
           }
 
 
@@ -95,14 +119,12 @@ const Profile = (props) => {
 
 
       return (
+        <ScrollView>
             <View style={styles.container}>
               <Text style={styles.header}>
-                 Write a secret note!
+                 Social Media Passwords
               </Text>
               {/* text on the left side */}
-              <Text style={styles.header}>
-               Name: {name}
-              </Text>
               <Pressable
         style={({ pressed }) => [
           styles.header
@@ -113,34 +135,59 @@ const Profile = (props) => {
           </Text>
         )}
       </Pressable>
-              {/* <Text style={styles.header}>
-               Email: {email}
-              </Text> */}
+      <Pressable
+        style={({ pressed }) => [
+          styles.header
+        ]}>
+        {({ pressed }) => (
+          <Text style={styles.header}>
+            {pressed ? note2 : disguise2}
+          </Text>
+        )}
+      </Pressable>
+      <Pressable
+        style={({ pressed }) => [
+          styles.header
+        ]}>
+        {({ pressed }) => (
+          <Text style={styles.header}>
+            {pressed ? note3 : disguise3}
+          </Text>
+        )}
+      </Pressable>
+      <Pressable
+        style={({ pressed }) => [
+          styles.header
+        ]}>
+        {({ pressed }) => (
+          <Text style={styles.header}>
+            {pressed ? note4 : disguise4}
+          </Text>
+        )}
+      </Pressable>
+      <Pressable
+        style={({ pressed }) => [
+          styles.header
+        ]}>
+        {({ pressed }) => (
+          <Text style={styles.header}>
+            {pressed ? note5 : disguise5}
+          </Text>
+        )}
+      </Pressable>
+             
               <View style={styles.inputs}>
-              <TextInput
-                    style={styles.textinput}
-                    placeholder="name"
-                    onChangeText={text => {
-                      setName(text)
-                    }}
-                    value={name}
-                />
-              {/* <TextInput
-                    style={styles.textinput}
-                    placeholder="email"
-                    onChangeText={text => {setEmail(text)}}
-                    value={email}
-                /> */}
+                <Text>Platform 1</Text>
                 <TextInput
                     style={styles.textinput}
                     onChangeText={setDisguise}
                     value={disguise}
-                    placeholder="disguise"
+                    placeholder="Platform"
                 />
                 <TextInput
                     secureTextEntry={true}
                     style={styles.textinput}
-                    placeholder="secret"
+                    placeholder="password"
                     onChangeText={setNote}
                     value={note}
                     // multiline={true}
@@ -148,13 +195,97 @@ const Profile = (props) => {
                     
                 />
                 </View>
+                <View style={styles.inputs}>
+                <Text>Platform 2</Text>
+                <TextInput
+                    style={styles.textinput}
+                    onChangeText={setDisguise2}
+                    value={disguise2}
+                    placeholder="Platform"
+                />
+                <TextInput
+                    secureTextEntry={true}
+                    style={styles.textinput}
+                    placeholder="password"
+                    onChangeText={setNote2}
+                    value={note2}
+                    // multiline={true}
+                    // numberOfLines={4}
+                    
+                />
+                </View>
+                <View style={styles.inputs}>
+                <Text>Platform 3</Text>
+                <TextInput
+                    style={styles.textinput}
+                    onChangeText={setDisguise3}
+                    value={disguise3}
+                    placeholder="Platform"
+                />
+                <TextInput
+                    secureTextEntry={true}
+                    style={styles.textinput}
+                    placeholder="password"
+                    onChangeText={setNote3}
+                    value={note3}
+                    // multiline={true}
+                    // numberOfLines={4}
+                    
+                />
+                </View>
+                <View style={styles.inputs}>
+                <Text>Platform 4</Text>
+                <TextInput
+                    style={styles.textinput}
+                    onChangeText={setDisguise4}
+                    value={disguise4}
+                    placeholder="Platform"
+                />
+                <TextInput
+                    secureTextEntry={true}
+                    style={styles.textinput}
+                    placeholder="password"
+                    onChangeText={setNote4}
+                    value={note4}
+                    // multiline={true}
+                    // numberOfLines={4}
+                    
+                />
+                </View>
+                <View style={styles.inputs}>
+                <Text>Platform 5</Text>
+                <TextInput
+                    style={styles.textinput}
+                    onChangeText={setDisguise5}
+                    value={disguise5}
+                    placeholder="Platform"
+                />
+                <TextInput
+                    secureTextEntry={true}
+                    style={styles.textinput}
+                    placeholder="password"
+                    onChangeText={setNote5}
+                    value={note5}
+                    // multiline={true}
+                    // numberOfLines={4}
+                    
+                />
+                </View>
+
+                <View style={styles.buttonContainer}>
                 <View style={styles.buttons}>
               <Button
                     color='green' title='Save secret note'
                     onPress = {() => {
                          console.log("saving profile");
                          //for LOADING
-                         const theInfo = {name:name, email:email, disguise:disguise, note:note}
+                         const theInfo = {name:name, email:email, 
+                          disguise:disguise, note:note, 
+                          disguise2:disguise2, note2:note2, 
+                          disguise3:disguise3, note3:note3, 
+                          disguise4:disguise4, note4:note4, 
+                          disguise5:disguise5, note5:note5}
+
                          console.log(`theInfo=${theInfo}`)
                          setInfo(theInfo)
                          console.log('data='+JSON.stringify(theInfo))
@@ -180,19 +311,10 @@ const Profile = (props) => {
                       }}
                 />
                 </View>
-                {/* <View style={styles.buttons}>
-                <Button
-                  color='purple' title='color'
-                  onPress = {() => {
-                      }}
-                />
-                </View> */}
-              
-              {/* <Text style={styles.secret}>
-               info={JSON.stringify(info)}
-              </Text> */}
+                </View>
 
             </View>
+            </ScrollView>
       );
     }
   const styles = StyleSheet.create ({
@@ -209,15 +331,15 @@ const Profile = (props) => {
       width: '20%',
     },
     inputs:{
-      marginTop: 200,
-      width: '40%',
+      marginTop: 20,
+      width: '80%',
     },
     textinput:{
       margin:10,
       fontSize:20,
       borderColor:'black',
       borderWidth:'2px',
-      width: '40%',
+      width: '100%',
       borderRadius:'10px'
     },
     noteinput:{
@@ -250,4 +372,4 @@ const Profile = (props) => {
     }
   });
 
-export default Profile;
+export default Social;
