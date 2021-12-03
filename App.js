@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, TouchableOpacity, StyleSheet} from 'react-native';
 /*
 import {View} from 'react-native';
 import NavDemo1 from './components/NavDemo1'
@@ -22,6 +22,13 @@ import Social from './components/Social'
 import Pomodoros from './components/Pomodoros'
 import WebViewer from './components/WebViewer'
 import NavDemo1 from './components/NavDemo1'
+// import NavDemo1copy from './components/NavDemo1copy'
+import NavDemo2 from './components/NavDemo2'
+import BBViewer from './components/BBViewer'
+// import Navigator from './components/Navigator'
+// import ApiView from './components/ApiView'
+
+
 
 
 
@@ -31,8 +38,10 @@ export default function App() {
     //<WebViewer/>
     //<Social />
    <View style={styles.container}>
-    <NavDemo1>
-    </NavDemo1>
+    {/* <NavDemo1></NavDemo1> */}
+    <NavDemo1></NavDemo1>
+    {/* <NavDemo2></NavDemo2> */}
+    {/* <ApiView></ApiView> */}
     </View>
   );
 }
